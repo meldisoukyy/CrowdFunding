@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+main > div {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+}
+
+.left-div {
+    left: 0;
+    background-color: white;
+}
+
+.right-div {
+    right: 0;
+    background-color: #eaf3fa;
+}
+
+.middle-div {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    z-index: 2;
+}
+
+.middle-div_logo {
+    width: 250px;
+}
+
+.left-div_logo {
+    margin-top: 20px;
+    margin-left: 80px;
+    text-decoration: none;
+    color: #3A97AF;
+    font-weight: 700;
+    font-size: 1.8em;
+    width: 150px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img{
+    width: 100%;
+}
+
+.sign-in {
+    width: 70%;
+    text-align: left;
+}
+
+.forget-password { 
+    text-decoration: none;
+}
+
+.button-div {
+    width: 100%;
+    text-align: center;
+}
+
+.submit-button {
+    width: 40%;
+    color: white !important;
+    background-color: #ffb93f !important;
+    font-weight: 700 !important;
+    font-size: 1.2em !important;
+}
+
+.sign-in label {
+    color: #3A97AF;
+}
+
+.sign-in input {
+    border: 1px solid #3A97AF !important;
+}
