@@ -1,0 +1,3 @@
+FROM postgres
+ENV POSTGRES_PASSWORD crowdfunding
+ENV POSTGRES_DB crowdfunding
