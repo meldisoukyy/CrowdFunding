@@ -1,5 +1,5 @@
 *.sql
 crowdfunding-venv/
-__pycache__/
-*.pyc
+crowdfunding/__pycache__/
+project/__pycache__/
 db.sqlite3
