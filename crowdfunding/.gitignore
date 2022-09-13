@@ -1,3 +1,5 @@
 *.sql
+*.py[co]
+*.DS_STORE
 crowdfunding-venv/
 db.sqlite3
