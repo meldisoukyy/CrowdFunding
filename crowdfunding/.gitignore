@@ -1,1 +1,4 @@
+*.sql
+crowdfunding-venv/
 __pycache__/
+db.sqlite3
