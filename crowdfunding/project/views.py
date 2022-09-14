@@ -27,8 +27,8 @@ def project(request):
 #     return render(request, 'project/create.html', context = context)
 
 class CreateProject(CreateView):
-    model = Project
-    fields = '__all__'
+    form_class = ProjectForm
+    # fields = '__all__'
     template_name = 'project/create.html'
 
     def get_success_url(self):
