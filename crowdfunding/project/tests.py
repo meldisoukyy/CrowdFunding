@@ -7,10 +7,12 @@ class ProjectIsExist(TestCase):
     def test_home_page(self):
         response = self.client.get(reverse('project_home'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'project/home.html')
 
     def test_create_page(self):
         response = self.client.get(reverse('create_project'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'project/create.html')
 
 class ProjectModelTest(TestCase):
     def setUp(self):
