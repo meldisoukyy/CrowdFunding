@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 
 from .models import Project
@@ -24,8 +24,9 @@ class CreateProject(CreateView):
 def update_project(request):
     pass
 
-def view_project(request, project_id):
-    pass
+class ViewProject(DetailView):
+    model = Project
+    template_name: str = 'project/view.html'
 
 def delete_project(request, project_id):
     pass
