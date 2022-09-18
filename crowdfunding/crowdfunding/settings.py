@@ -152,3 +152,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com'      #   ahmedmohamedtaha2002@gmail.com
 EMAIL_HOST_PASSWORD = 'fynlsfiddctadpwd'            #    fynlsfiddctadpwd
 EMAIL_PORT = 587
+
+LOGIN_REDIRECT_URL = "project_home"
+LOGOUT_REDIRECT_URL = "project_home"

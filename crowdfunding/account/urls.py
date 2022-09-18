@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.contrib.auth import views
 from .views import (
     socialHomeView,
     register,
@@ -14,5 +15,6 @@ urlpatterns = [
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
         activate, name='activate'),
     path('login/', signin, name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
     path('',include('password.urls')),
 ]

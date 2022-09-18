@@ -52,13 +52,13 @@
     >
       <img
         class="profile-image"
-        src="{% static 'base/imgs/profile-image.png' %}"
+        src="{{ user.image.url }}"
       />
     </button>
     <ul class="dropdown-menu dropdown-menu dropdown-menu-lg-start">
       <li ><a class="dropdown-item" href="#">Profile</a></li>
       <li ><a class="dropdown-item" href="#">Edit Profile</a></li>
-      <li ><a class="dropdown-item" href="#">Logout</a></li>
+      <li ><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
     </ul>
   </div>
 </nav>
