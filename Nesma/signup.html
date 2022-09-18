@@ -1,59 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <title>Sign Up</title>
-</head>
-<body>
-    <main>
-        <div class="middle-div">
-            <img class="middle-div_logo" src="logo.png" alt="">
+<html>
+    <head>
+        <link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <title> Sign up</title>
+        <style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-image: url("2.jpg");
+}
+
+.right {
+  right: 0;
+  background-color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+      </style>
+    </head>
+    <div class="split left">
+        <div class="centered">
         </div>
-        <div class="left-div">
-            <p class="left-div_logo">CrowdFunding</p>
-            <div class="centered">
-                <img src="5240.jpg">
+      </div>
+      
+      <div class="split right">
+        <div class="centered">
+            <div>
+            <img src="loan.png" style="width: 100px; height: 100px;">
+            <span style="color:#225A69; font-weight:1000; font-size: larger; font-family: poppins; ">CrowdFunding</span>
             </div>
+            <br>
+            <form class="form-horizontal" action="/action_page.php">
+                <div class="form-row">
+                    <div class="col">
+                    <label style="color:#225A69; font-weight: 900;"> First Name:</label>
+                    <input type="text" class="form-control" placeholder="First name" style="border-radius:10px; width: 200px; height: 30px; border-color:rgb(181, 180, 180);">
+                    </div>
+
+                    <br>
+                    
+                    <div class="col">
+                    <label style="color:#225A69; font-weight: 900;"> Last Name:</label>
+                    <input type="text" class="form-control" placeholder="Last name" style="border-radius:10px; width: 200px; height: 30px; border-color:rgb(181, 180, 180);">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <label for="birthday" style="color:#225A69; font-weight: 900;">Date of Birth:</label>
+                        <input type="date" id="birthday" name="birthday" style="border-radius:10px; width: 200px; height: 30px; border-color:rgb(181, 180, 180);">
+                    </div>
+
+                    <br>
+
+
+                    <div class="form-group col-md-6">
+                    <label for="inputEmail4" style="color:#225A69; font-weight: 900;">Email:</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email" style="border-radius:10px; width: 200px; height: 30px; border-color:rgb(181, 180, 180);">
+                    </div>
+
+                    <br>
+
+                    <div class="form-group col-md-6">
+                    <label for="inputPassword4" style="color:#225A69; font-weight: 900;">Password:</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password" style="border-radius:10px; width: 200px; height: 30px; border-color:rgb(181, 180, 180);"><br>
+                    <small id="passwordHelpBlock" class="form-text text-muted" style="color:lightgrey ;">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters.
+                    </small>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1" style="color:#225A69; font-weight: 900;">I accept all the Terms & Conditions</label>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default" style="background-color:#225A69; color: FAA71B ; font-weight: 600; border-radius: 8px; width: 200px; height: 40px;">Register</button>
+                        </div>                   
+                </div>
+                
+                    <div class="container signin">
+                        <p style="color:grey;">Already have an account? <a href="login.html" style="color:#FAA71B; font-weight: 900;">Log in</a>.</p>
+                        <p style="color:grey;"> ______ or sign up with ______</p>
+                        <a href="#" class="fa fa-facebook" style="color:#225A69;"></a>
+                        <a href="#" class="fa fa-github" style="color:#FAA71B;"></a>
+                        <a href="#" class="fa fa-google" style="color:#225A69;"></a>
+                        <a href="#" class="fa fa-linkedin" style="color:#FAA71B;"></a>
+                        <a href="#" class="fa fa-twitter" style="color:#225A69;"></a>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+                <br>
+                
+                </div>
+              </form>
         </div>
-        <div class="right-div">
-            <div class="centered sign-in">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">First Name:</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Last Name:</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Confrim Password:</label>
-                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <form action="" method="get">
-                        <input type="checkbox" name="confirm" value="Agree">
-                        <label for="confirm"> I accept all the terms and conditions </label><br>
-                      </form>
-                  </div>
-                  <div class="button-div">
-                    <button type="submit" class="btn submit-button">Register</button>
-                  </div>
-                </form>
-            </div>
-        </div>
-        </div>
-    </main>
-</body>
+    </div>
+</html>
