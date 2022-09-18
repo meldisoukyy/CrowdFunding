@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     'project.apps.ProjectConfig',
 
     'categories.apps.CategoriesConfig',
+    'account.apps.AccountConfig',
 
     'crispy_forms',
     'django_cleanup',
+    'django_countries',
+    'social_django',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +144,11 @@ MEDIA_URL = '/media/'
 
 # CRISPY Config
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTH_USER_MODEL = 'account.User'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com'      #   ahmedmohamedtaha2002@gmail.com
+EMAIL_HOST_PASSWORD = 'fynlsfiddctadpwd'            #    fynlsfiddctadpwd
+EMAIL_PORT = 587
