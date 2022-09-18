@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
 
     'crispy_forms',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
