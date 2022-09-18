@@ -1,14 +1,10 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <title>Django blog</title>
-        <link rel="stylesheet" href="{% static 'project/css/base.css' %}">
-</head>
-<body>
+{% block content %}
     <h1> Projects Homepage </h1>
     <ul>
         {% for project in all_projects %}
-            <li>{{project.project_title}} - id: {{project.id}} </li>
+            <li>{{project.project_title}} - id: {{project.id}}</li>
         {% endfor %}
     </ul>
-</body>
+{% endblock %}

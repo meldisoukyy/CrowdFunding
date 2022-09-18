@@ -1,4 +1,3 @@
-from datetime import date
 from django.db import models
 from categories.models import Category
 
@@ -9,7 +8,7 @@ class Project(models.Model):
     project_details = models.TextField(null=True)
     # project_images = models.ImageField()
     project_total_target = models.IntegerField(null=True)
-    project_start_date = models.DateField(null=True, blank=True, default=date.today())
+    project_start_date = models.DateField(null=True, blank=True)
     project_end_date = models.DateField(null=True, blank=True) 
 
     def __str__(self):
