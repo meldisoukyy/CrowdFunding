@@ -19,29 +19,23 @@ class ProjectHome(ListView):
 class CreateProject(SuccessMessageMixin, CreateView):
     form_class = ProjectForm
     template_name = 'project/create.html'
+    extra_context = {"imageform": ImageForm()}
     # success_message: str = 'Object Created Successfully!'
     def get_success_url(self):
         return reverse('project_home')
-
-def create_project(request):
-    if request.method == "POST":
+    
+    def post(self, request, *args, **kwargs):
         form = ProjectForm(request.POST)
         files = request.FILES.getlist("image")
         if form.is_valid():
             f = form.save(commit=False)
             f.created_by = request.user
             f.save()
+            form.save_m2m()
             for i in files:
                 Image.objects.create(project=f, image=i)
             # messages.success(request, "New Project Added")
             return HttpResponseRedirect("/project")
-        else:
-            print(form.errors)
-    else:
-        form = ProjectForm()
-        imageform = ImageForm()
-
-    return render(request, "project/create.html", {"form": form, "imageform": imageform})
 
 # Update
 class UpdateProject(UpdateView):
