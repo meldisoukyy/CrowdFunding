@@ -13,6 +13,23 @@
   <div class="card-body create-form">
     <form class="" method="POST" enctype="multipart/form-data">
       {% csrf_token %} {{form|crispy }}
+      <div id="div_id_project_image" class="form-group"> 
+        <label for="id_image" class=" requiredField">
+                Upload new images
+        </label> 
+        <div>
+        {{ imageform.management_form }}
+        {% for form in imageform %}
+            {{ form }}
+        {% endfor %}
+        </div>
+      </div>
+      <div>
+        {% for image in images %}
+          <img src='{{ image.image.url }}' style='width:100px; height:100px' />
+        {% endfor %}
+      </div>
+      <br>
       <div class="btns">
         <button type="submit" class="btn btn-submit">Create</button>
         <a href="#" class="btn btn-return">Return</a>

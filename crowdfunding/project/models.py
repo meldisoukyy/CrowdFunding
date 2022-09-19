@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import get_list_or_404
 from categories.models import Category
 from account.models import User
 from taggit.managers import TaggableManager
@@ -21,3 +22,4 @@ class Project(models.Model):
 class Image(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='project/imgs', null=True)
+    
