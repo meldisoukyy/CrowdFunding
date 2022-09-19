@@ -9,5 +9,5 @@ urlpatterns = [
     path('view/<int:pk>', vi.ViewProject.as_view(), name='view_project'),
     # path('tag/<slug:tag_slug>', vi.projects_index, name="project_by_tag"),
     path('tag/<slug:slug>/', vi.tagged, name="tagged"),
-    path('submit_review/<int:project_id>/', vi.submit_review, name='submit_review')
+    path('submit_review/<int:project_id>/', vi.submit_review, name='submit_review'),
 ]
