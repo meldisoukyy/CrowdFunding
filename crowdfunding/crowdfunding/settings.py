@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_countries',
     'social_django',
     'sslserver',
+    'taggit',
 ]
 
 MIDDLEWARE = [

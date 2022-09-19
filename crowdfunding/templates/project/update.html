@@ -11,7 +11,7 @@
 <div class="card">
   <div class="card-header">Update Project</div>
   <div class="card-body create-form">
-    <form class="" method="POST">
+    <form class="" method="POST" enctype="multipart/form-data">
       {% csrf_token %} {{form|crispy }}
       <div class="btns">
         <button type="submit" class="btn btn-submit">Create</button>

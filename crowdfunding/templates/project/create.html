@@ -11,8 +11,19 @@
 <div class="card">
   <div class="card-header">Create Project</div>
   <div class="card-body create-form">
-    <form class="" method="POST">
-      {% csrf_token %} {{form|crispy }}
+    <form class="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {{form|crispy }}
+      {% comment %} {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+      {% endfor %}
+      {% for field in form %}
+          {{ field }} <br />
+      {% endfor %} {% endcomment %}
+      {{ imageform.management_form }}
+      {% for form in imageform %}
+          {{ form }}
+      {% endfor %}
       <div class="btns">
         <button type="submit" class="btn btn-submit">Create</button>
         <a href="#" class="btn btn-return">Return</a>

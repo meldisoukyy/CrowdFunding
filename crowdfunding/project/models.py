@@ -1,7 +1,8 @@
 from django.db import models
 from categories.models import Category
+from account.models import User
+from taggit.managers import TaggableManager
 
-# Create your models here.
 class Project(models.Model):
     project_title = models.CharField(max_length=100, help_text='Project title should not exceed 100 character.')
     project_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
@@ -9,12 +10,14 @@ class Project(models.Model):
     project_total_target = models.IntegerField(null=True)
     project_start_date = models.DateField(null=True, blank=True)
     project_end_date = models.DateField(null=True, blank=True) 
-    # project_created_date = models.DateTimeField(auto_now_add=True)
+    project_tags = TaggableManager()
+    project_created_date = models.DateTimeField(auto_now_add=True, null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.project_title
 
 
-class Images(models.Model):
-    note = models.ForeignKey(Project,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='project/imgs',null=True,blank=True)
+class Image(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='project/imgs', null=True)
