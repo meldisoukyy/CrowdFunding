@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from .models import User
 from .tokens import account_activation_token
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterForm
@@ -16,7 +17,7 @@ django.utils.encoding.force_text = force_str
 
 
 def socialHomeView(request):
-    return render(request, 'social_home/home.html')
+    return render(request, 'product/home.html')
 
 def register(request):
     if request.method == 'GET':
@@ -65,7 +66,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return redirect(reverse('login')) 
     else:
         return HttpResponse('Activation link is invalid!')
 

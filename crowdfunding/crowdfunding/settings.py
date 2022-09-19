@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'crowdfunding.urls'
@@ -73,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -80,6 +83,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crowdfunding.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '471764168203737'
+SOCIAL_AUTH_FACEBOOK_SECRET = '05e7ce0d1c4abd9ab6fe5a4f0e2d930f'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -90,9 +102,27 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'crowdfunding',
-        'PORT':5432,
-        'HOST':'127.0.0.1'   
-        }
+        'PORT': 5432,
+        'HOST': '127.0.0.1'
+    }
+}
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'account.utils.save_profile',
+)
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email, picture.type(large), link'
 }
 
 
@@ -149,9 +179,11 @@ AUTH_USER_MODEL = 'account.User'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com'      #   ahmedmohamedtaha2002@gmail.com
-EMAIL_HOST_PASSWORD = 'fynlsfiddctadpwd'            #    fynlsfiddctadpwd
+EMAIL_HOST_USER = 'ccrowdfundingg@gmail.com'
+EMAIL_HOST_PASSWORD = 'bnpstdlbbmdgfooy'
 EMAIL_PORT = 587
 
+LOGIN_URL = 'account/login'
+LOGOUT_URL = 'account/logout'
 LOGIN_REDIRECT_URL = "project_home"
-LOGOUT_REDIRECT_URL = "project_home"
+LOGOUT_REDIRECT_URL = "/"

@@ -9,13 +9,12 @@ from django.core.validators import RegexValidator
 # Create your models here.
 
 class User(AbstractUser):
-    image = models.ImageField(upload_to='account/image',null=True, blank=True)
+    image = models.ImageField(upload_to='account/image',null=True, blank=True, default='account/image/john.jpg')
     phone_regex = RegexValidator(regex=r'^01[1|0|2|5][0-9]{8}$', message='phone must be an egyptian phone number...')
     phone = models.CharField(validators=[phone_regex], max_length=14, blank=True)
     birthday = models.DateField(null=True,blank=True)
     country = CountryField(default='EG',blank=True)
     facebook = models.URLField(max_length=500,null=True, blank=True)
-    # //////////////////////////////////////////
 
 
     def get_image_from_url(self, url):
