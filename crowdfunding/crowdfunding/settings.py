@@ -42,6 +42,9 @@ INSTALLED_APPS = [
 
     'categories.apps.CategoriesConfig',
     'account.apps.AccountConfig',
+    'password',
+    'donation',
+    'comment',
 
     'crispy_forms',
     'django_cleanup',
