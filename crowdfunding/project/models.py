@@ -23,3 +23,9 @@ class Image(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='project/imgs', null=True)
     
+class ReviewRating(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    rating = models.FloatField()
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

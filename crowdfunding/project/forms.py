@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Project, Image
+from .models import Project, Image, ReviewRating
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -24,3 +24,8 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ("image",)
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = ReviewRating
+        fields = ['rating']

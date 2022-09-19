@@ -5,11 +5,10 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django_countries.fields import CountryField
 from django.core.validators import RegexValidator
-
-# Create your models here.
+from django.urls import reverse
 
 class User(AbstractUser):
-    image = models.ImageField(upload_to='account/image',null=True, blank=True, default='account/image/john.jpg')
+    image = models.ImageField(upload_to='account/image',null=True, blank=True, default='account/image/default.png')
     phone_regex = RegexValidator(regex=r'^01[1|0|2|5][0-9]{8}$', message='phone must be an egyptian phone number...')
     phone = models.CharField(validators=[phone_regex], max_length=14, blank=True)
     birthday = models.DateField(null=True,blank=True)
@@ -27,3 +26,6 @@ class User(AbstractUser):
 
     def save_url(self,url):
         self.facebook = url    
+    
+    def get_absolute_url(self):
+        return reverse('project_home')

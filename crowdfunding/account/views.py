@@ -1,3 +1,4 @@
+from django.views.generic.edit import UpdateView
 from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from .models import User
@@ -6,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterForm
+from .forms import RegisterForm, EditProfileForm
 from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
@@ -92,3 +93,10 @@ def signin(request):
 
 def home(request):
     return render(request, 'home/home.html')
+
+class UpdateCoursesView(UpdateView):
+    form_class = EditProfileForm
+    template_name = 'account/edit.html'
+    model = User
+    context_object_name = "object"
+    

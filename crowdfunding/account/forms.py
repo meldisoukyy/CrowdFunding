@@ -3,9 +3,6 @@ from django.contrib.auth.forms import UserCreationForm , UserChangeForm
 from django.core.validators import RegexValidator
 from django.contrib.auth import authenticate
 from .models import User
-# from phonenumber_field.modelfields import PhoneNumberField
-# from .models import Users
-# from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -37,11 +34,6 @@ class RegisterForm(UserCreationForm):
             attrs={'class': 'form-control', 'placeholder': 'Password Again'}
         ), )
 
-    # phone_regex = RegexValidator(regex=r'^01[1|0|2|5][0-9]{8}$', message='phone must be an egyptian phone number...')
-    #
-    # phone = forms.CharField( validators=[phone_regex], max_length=14)
-    #
-    # phone = PhoneNumberField()
     check = forms.BooleanField(required=True)
 
     class Meta:
@@ -50,8 +42,11 @@ class RegisterForm(UserCreationForm):
 
 
 class UserForm(forms.ModelForm):
-
     class Meta:
         model = User
         fields = ['username', 'password']
 
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'image', 'birthday', 'phone', 'country', 'facebook')

@@ -1,0 +1,18 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+{% block content %}
+
+{% if searched %}
+<h1>You Are Trying To Search For... <font color="#6495ed">{{searched}}</font></h1><br/>
+    {% for project in projects %}
+        <a href="{% url 'view_project' project.id %}">{{ project.project_title }}</a><br/>
+
+            {% for tag in project.project_tags.all %}
+                   <a class="tags" style ="padding:6px; font-weight: bold;" href="{% url 'tagged' tag.slug %}">#{{ tag }}</a><br/>
+            {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+

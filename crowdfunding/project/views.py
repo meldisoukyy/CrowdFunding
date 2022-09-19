@@ -5,17 +5,29 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
-import project
+from taggit.models import Tag
 
 from .models import Project, Image
-from .forms import ProjectForm, ImageForm
+from .forms import ProjectForm, ImageForm, ReviewRating, ReviewForm
+
+from categories.models import Category
 
 class ProjectHome(ListView):
     model = Project
     template_name: str = 'project/home.html'
     context_object_name = 'all_projects'
+
+    def post(self, request, *args, **kwargs):
+        searched = request.POST['searched']
+        try:
+            tag = Tag.objects.get(slug=searched)
+            projects = Project.objects.filter(project_tags=tag)
+        except:
+            projects = Project.objects.filter(project_title__contains=searched)
+        return render(request, 'project/search.html', context={"searched": searched, "projects": projects})
 
 # Create
 class CreateProject(SuccessMessageMixin, CreateView):
@@ -79,3 +91,43 @@ class DeleteProject(DeleteView):
     model = Project
     template_name: str = 'project/view.html'
     success_url = reverse_lazy('project_home')
+
+# def projects_index(request, tag_slug=None):
+#     projects = Project.get_all_projects()
+#     categories = Category.get_all_categories()
+#     tag = None
+#     if tag_slug:
+#         tag = get_object_or_404(Tag, slug=tag_slug)
+#         projects = Project.objects.filter(tags__in=[tag])
+#     return render(request, 'project/index.html', context={"projects": projects, "categories": categories, "tag": tag})
+
+def submit_review(request, project_id):
+    url = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        try:
+            reviews = ReviewRating.objects.get(project__id=project_id)
+            form = ReviewForm(request.POST, instance=reviews)
+            form.save()
+            messages.success(request, 'Thank you! Your review has been updated.')
+            return redirect(url)
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.rating = form.cleaned_data['rating']
+                data.project_id = project_id
+                data.save()
+                messages.success(request, 'Thank you! Your review has been submitted.')
+                return redirect(url)  
+    project = get_object_or_404(Project, pk=project_id)
+    return render(request, 'project/show.html', {"project":project})
+
+def tagged(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+
+    projects = Project.objects.filter(tags=tag)
+    context = {
+        'tag': tag,
+        'projects': projects,
+    }
+    return render(request, 'project/search.html', context)

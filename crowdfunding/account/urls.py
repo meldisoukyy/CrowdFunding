@@ -4,7 +4,8 @@ from .views import (
     socialHomeView,
     register,
     activate,
-    signin
+    signin,
+    UpdateCoursesView,
 )
 
 urlpatterns = [
@@ -16,5 +17,6 @@ urlpatterns = [
         activate, name='activate'),
     path('login/', signin, name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('edit_profile/<int:pk>', UpdateCoursesView.as_view(), name='edit_profile'),
     path('',include('password.urls')),
 ]

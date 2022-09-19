@@ -17,7 +17,9 @@
     CrowdFunding
   </a>
   <!-- Search -->
-  <form class="form-inline search">
+  
+  <form class="form-inline search" method="post" action="">
+    {% csrf_token %}
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1"
@@ -33,6 +35,7 @@
         placeholder="Search"
         aria-label="Search"
         aria-describedby="basic-addon1"
+        name='searched'
       />
       <datalist id="test">
         <option value="GOT"></option>
@@ -57,7 +60,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu dropdown-menu-lg-start">
       <li ><a class="dropdown-item" href="#">Profile</a></li>
-      <li ><a class="dropdown-item" href="#">Edit Profile</a></li>
+      <li ><a class="dropdown-item" href="{% url 'edit_profile' user.id %}">Edit Profile</a></li>
       <li ><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
     </ul>
   </div>
