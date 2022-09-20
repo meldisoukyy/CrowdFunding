@@ -1,10 +1,10 @@
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from .models import User
 from .tokens import account_activation_token
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterForm, EditProfileForm
@@ -19,6 +19,7 @@ django.utils.encoding.force_text = force_str
 
 def socialHomeView(request):
     return render(request, 'product/home.html')
+
 
 def register(request):
     if request.method == 'GET':
@@ -99,4 +100,12 @@ class UpdateCoursesView(UpdateView):
     template_name = 'account/edit.html'
     model = User
     context_object_name = "object"
-    
+
+    def post(self, request, *args, **kwargs):
+        if request.POST['delete_account']:
+            user_id = self.kwargs['pk']
+            user = User.objects.filter(pk = user_id)
+            user.delete()
+            return redirect('/')
+        else:
+            return super().post(self, request, *args, **kwargs)

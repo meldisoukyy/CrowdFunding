@@ -47,6 +47,11 @@
     color: white;
 }
 
+.dropdown-item:active {
+    background-color: white;
+    color: black;
+}
+
 .profile-image {
     width: 40px;
     height: 40px;
