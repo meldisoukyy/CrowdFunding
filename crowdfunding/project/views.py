@@ -64,8 +64,6 @@ class UpdateProject(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['imageform'] = ImageForm()
-        project = get_object_or_404(Project, pk=self.kwargs['pk'])
-        context['images'] = Image.objects.filter(project=project)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -76,9 +74,11 @@ class UpdateProject(UpdateView):
             f.created_by = request.user
             f.save()
             form.save_m2m()
+            if files:
+                images = Image.objects.filter(project=self.kwargs['pk'])
+                images.delete()
             for i in files:
                 Image.objects.create(project=f, image=i)
-            # messages.success(request, "New Project Added")
             return HttpResponseRedirect("/project")
 
 # View

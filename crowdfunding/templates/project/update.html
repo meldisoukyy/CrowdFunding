@@ -2,6 +2,7 @@
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'project/css/create.css' %}" />
+    <link rel="stylesheet" href="{% static 'project/css/update.css' %}" />
     <link rel="stylesheet" href="{% static 'base/css/navbar.css' %}" />
     <link rel="stylesheet" href="{% static 'base/css/footer.css' %}" />
 {% endblock css %}
@@ -14,7 +15,7 @@
     <form class="" method="POST" enctype="multipart/form-data">
       {% csrf_token %} {{form|crispy }}
       <div id="div_id_project_image" class="form-group"> 
-        <label for="id_image" class=" requiredField">
+        <label>
                 Upload new images
         </label> 
         <div>
@@ -24,14 +25,8 @@
         {% endfor %}
         </div>
       </div>
-      <div>
-        {% for image in images %}
-          <img src='{{ image.image.url }}' style='width:100px; height:100px' />
-        {% endfor %}
-      </div>
-      <br>
       <div class="btns">
-        <button type="submit" class="btn btn-submit">Create</button>
+        <button type="submit" class="btn btn-submit">Update</button>
         <a href="#" class="btn btn-return">Return</a>
       </div>
     </form>
