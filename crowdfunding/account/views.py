@@ -102,7 +102,7 @@ class UpdateCoursesView(UpdateView):
     context_object_name = "object"
 
     def post(self, request, *args, **kwargs):
-        if request.POST['delete_account']:
+        if 'delete_account' in request.POST.keys():
             user_id = self.kwargs['pk']
             user = User.objects.filter(pk = user_id)
             user.delete()

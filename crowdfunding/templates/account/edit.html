@@ -17,13 +17,13 @@
       </div>
       <div class="modal-body">
         Are you sure you want to permanently remove your account?
-        <input type="text" id="name" name="delete_account">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <form action="{% url 'edit_profile' pk=user.id %}" method="POST">
+        <form action="" method="POST">
             {% csrf_token %}
-            <button class="btn btn-danger">Delete</button>
+            <input type="text" id="name" name="delete_account" style='display:none;'></input>
+            <button type='submit' class="btn btn-danger">Delete</button>
         </form>
       </div>
     </div>
