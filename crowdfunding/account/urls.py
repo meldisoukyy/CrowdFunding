@@ -8,6 +8,8 @@ from .views import (
     ViewProfile,
     ViewProfileDonations,
     UpdateCoursesView,
+    Dashboard,
+    feature_it,
 )
 
 urlpatterns = [
@@ -21,5 +23,7 @@ urlpatterns = [
     path('view_profile/<int:pk>', ViewProfile.as_view(), name='view_profile'),
     path('view_profile/donations/<int:pk>', ViewProfileDonations.as_view(), name='view_profile_donations'),
     path('edit_profile/<int:pk>', UpdateCoursesView.as_view(), name='edit_profile'),
+    path('dashboard/', Dashboard.as_view(), name='dashboard'),
     path('',include('password.urls')),
+    path('feature_id/', feature_it, name='feature_it'),
 ]

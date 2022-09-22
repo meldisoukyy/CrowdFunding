@@ -1,10 +1,11 @@
+from pipes import Template
 from django.views.generic.edit import UpdateView, DeleteView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from .models import User
 from .tokens import account_activation_token
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
@@ -17,6 +18,7 @@ from django.utils.encoding import force_bytes, force_str
 import django
 from project.models import Project
 from donation.models import Donation
+from categories.models import Category
 django.utils.encoding.force_text = force_str
 
 
@@ -130,3 +132,20 @@ class UpdateCoursesView(UpdateView):
             return redirect('/')
         else:
             return super().post(self, request, *args, **kwargs)
+
+class Dashboard(TemplateView):
+    model = Category 
+    template_name = 'account/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'projects': Project.objects.order_by('id'),
+        })
+        return context
+
+def feature_it(request):
+    project = get_object_or_404(Project, pk = request.POST['project'])
+    project.is_featured = True
+    project.save()
+    return redirect(reverse('dashboard'))
