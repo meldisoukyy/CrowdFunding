@@ -29,6 +29,7 @@
         /></span>
       </div>
       <input
+        list="list"
         type="text"
         class="form-control search-input"
         placeholder="Search"
@@ -37,6 +38,9 @@
         name='searched'
       />
     </div>
+    <datalist id="list">
+      {% block options %}{% endblock options %}
+    </datalist>
   </form>
   <!-- Dropdown -->
   <div class="btn-group">

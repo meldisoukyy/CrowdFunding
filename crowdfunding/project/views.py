@@ -18,6 +18,11 @@ from categories.models import Category
 from comment.models import Comment
 from donation.models import Donation
 
+from django.contrib.auth.mixins import (
+LoginRequiredMixin,
+UserPassesTestMixin # new
+)
+
 
 class LandingPage(ListView):
     model = Project
@@ -26,13 +31,17 @@ class LandingPage(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'projects': Project.objects.all(),
+            'projects': Project.objects.order_by('-project_created_date')[:6],
+            'featured_projects': Project.objects.filter(is_featured = True).order_by('-project_created_date')[:5],
             'categories': Category.objects.all(),
+            'donations_total': Donation.objects.count(),
+            'projects_total': Project.objects.count(),
+            'ratings_total': ReviewRating.objects.count(),
         })
         return context
 
 
-class ProjectHome(ListView):
+class ProjectHome(LoginRequiredMixin,ListView):
     model = Project
     template_name: str = 'project/home.html'
     context_object_name = 'all_projects'
@@ -41,7 +50,9 @@ class ProjectHome(ListView):
         context = super().get_context_data(**kwargs)
         context.update({
             'latest_projects': Project.objects.order_by('-project_created_date')[:10],
+            'featured_projects': Project.objects.filter(is_featured = True),
             'categories': Category.objects.order_by('name'),
+            'tags': Tag.objects.all(),
         })
         return context
 
@@ -57,7 +68,7 @@ class ProjectHome(ListView):
 # Create
 
 
-class CreateProject(SuccessMessageMixin, CreateView):
+class CreateProject(LoginRequiredMixin,SuccessMessageMixin, CreateView):
     form_class = ProjectForm
     template_name = 'project/create.html'
     extra_context = {"imageform": ImageForm()}
@@ -82,7 +93,7 @@ class CreateProject(SuccessMessageMixin, CreateView):
 # Update
 
 
-class UpdateProject(UpdateView):
+class UpdateProject(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = 'project/update.html'
@@ -111,6 +122,10 @@ class UpdateProject(UpdateView):
             for i in files:
                 Image.objects.create(project=f, image=i)
             return HttpResponseRedirect("/project")
+    
+    def test_func(self): # new
+        obj = self.get_object()
+        return obj.created_by == self.request.user
 
 # View
 class ViewProject(DetailView):
@@ -167,14 +182,27 @@ class ViewProject(DetailView):
 
         return HttpResponseRedirect("/project/view/"+str(self.kwargs['pk']))
     
+    def post_rate(self,request,*args, **kwargs):
+        project = get_object_or_404(Project,pk = self.kwargs['pk'])
+        data = ReviewRating()
+        data.project = project
+        data.rating = request.POST['rating']
+        data.user = request.user
+        data.save()
+        return HttpResponseRedirect("/project/view/"+str(self.kwargs['pk']))
+    
     def post_operation_not_supported(self,request,*args, **kwargs):
         return render(request, "errors/403.html", {})
 
 # Delete
-class DeleteProject(DeleteView):
+class DeleteProject(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Project
     template_name: str = 'project/view.html'
     success_url = reverse_lazy('project_home')
+    
+    def test_func(self): # new
+        obj = self.get_object()
+        return obj.created_by == self.request.user
 
 # def projects_index(request, tag_slug=None):
 #     projects = Project.get_all_projects()

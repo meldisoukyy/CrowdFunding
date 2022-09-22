@@ -189,7 +189,7 @@ EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com' # 'ccrowdfundingg@gmail.com'
 EMAIL_HOST_PASSWORD = 'pqulsefansjjlbhc' #'bnpstdlbbmdgfooy'
 EMAIL_PORT = 587
 
-LOGIN_URL = 'account/login'
-LOGOUT_URL = 'account/logout'
+LOGIN_URL = '/account/login'
+LOGOUT_URL = '/account/logout'
 LOGIN_REDIRECT_URL = "project_home"
 LOGOUT_REDIRECT_URL = "/"

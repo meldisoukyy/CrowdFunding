@@ -40,7 +40,7 @@ def password_reset_request(request):
                         mail_subject, message, to=[user.email]
                     )
                     email.send()
-                    return redirect ("/password_reset/done/")
+                    return redirect ("password/password_reset/done/")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})                    
    

@@ -16,3 +16,7 @@ urlpatterns = [
     path('donation/', include('donation.urls')),
     # path('category/', include('categories.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
+handler403 = 'crowdfunding.views.custom_permission_denied_view'
+handler404 = 'crowdfunding.views.custom_page_not_found_view'

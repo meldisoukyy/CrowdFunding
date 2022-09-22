@@ -12,12 +12,14 @@
     <div class="left-div">
         <!-- Project Images -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            {% if project.is_featured %}
             <div class="featured" id="featured-background">
                 <p>Featured</p>
             </div>
             <div class="featured">
                 <p>Featured</p>
             </div>
+            {% endif %}
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -58,30 +60,34 @@
         </div>
         <!-- Project Rating  -->
         <div class="project-rating">
-            <p>Rate project:</p>
-            <div class="rate">
-                <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10"
-                    title="5"></label>
-                <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5"
-                    class="half"></label>
-                <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8"
-                    title="4"></label>
-                <input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5"
-                    class="half"></label>
-                <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6"
-                    title="3"></label>
-                <input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5"
-                    class="half"></label>
-                <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4"
-                    title="2"></label>
-                <input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5"
-                    class="half"></label>
-                <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2"
-                    title="1"></label>
-                <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5"
-                    class="half"></label>
-            </div>
-            <button class="btn">Rate</button>
+            <form method='POST' class="project-rating">
+                {% csrf_token %}
+                <div class="rate">
+                    <input type='hidden' name='type' value='rate'>
+                    <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10"
+                        title="5"></label>
+                    <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5"
+                        class="half"></label>
+                    <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8"
+                        title="4"></label>
+                    <input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5"
+                        class="half"></label>
+                    <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6"
+                        title="3"></label>
+                    <input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5"
+                        class="half"></label>
+                    <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4"
+                        title="2"></label>
+                    <input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5"
+                        class="half"></label>
+                    <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2"
+                        title="1"></label>
+                    <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5"
+                        class="half"></label>
+                </div>
+                <button class="btn btn-primary" style='color:white;'>Rate</button>
+            </form>    
+            
         </div>
     </div>
     <div class="right-div">
