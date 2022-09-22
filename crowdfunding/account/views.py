@@ -1,4 +1,5 @@
 from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic import DetailView
 from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from .models import User
@@ -14,6 +15,8 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
 import django
+from project.models import Project
+from donation.models import Donation
 django.utils.encoding.force_text = force_str
 
 
@@ -27,14 +30,14 @@ def register(request):
         context = {'form': form}
         return render(request, 'registration/register.html', context)
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
             form.cleaned_data.get('username')
             current_site = get_current_site(request)
-            mail_subject = 'Activation link has been sent to your email id'
+            mail_subject = 'Please verify your registration in CrowdFunding'
             message = render_to_string(
                 'acc_active_email.html', {
                     'user': user,
@@ -48,7 +51,7 @@ def register(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'registration/check_mail.html')
 
         else:
             print('Form is not valid')
@@ -89,11 +92,29 @@ def signin(request):
             form = UserForm()
             return render(request, 'registration/login.html', {'form': form, 'error': 'invalid username or password'})
         login(request, user)
-        return render(request, 'project/home.html')
+        return redirect('project_home')
 
+class ViewProfile(DetailView):
+    model = User
+    template_name: str = 'account/view.html'
 
-def home(request):
-    return render(request, 'home/home.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'projects': Project.objects.filter(created_by=self.kwargs['pk']),
+        })
+        return context
+
+class ViewProfileDonations(DetailView):
+    model = User
+    template_name: str = 'account/view-donations.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'donations': Donation.objects.filter(user=self.kwargs['pk'])
+        })
+        return context
 
 class UpdateCoursesView(UpdateView):
     form_class = EditProfileForm

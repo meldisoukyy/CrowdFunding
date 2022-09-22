@@ -29,7 +29,6 @@
         /></span>
       </div>
       <input
-        list="test"
         type="text"
         class="form-control search-input"
         placeholder="Search"
@@ -37,18 +36,13 @@
         aria-describedby="basic-addon1"
         name='searched'
       />
-      <datalist id="test">
-        <option value="GOT"></option>
-        <option value="Better Call Saul"></option>
-        <option value="Breakin Bad"></option>
-      </datalist>
     </div>
   </form>
   <!-- Dropdown -->
   <div class="btn-group">
     <button
       type="button"
-      class="btn dropdown-toggle"
+      class="dropdown-toggle"
       data-bs-toggle="dropdown"
       data-bs-display="static"
       aria-expanded="false"
@@ -59,7 +53,10 @@
       />
     </button>
     <ul class="dropdown-menu dropdown-menu dropdown-menu-lg-start">
-      <li ><a class="dropdown-item" href="#">Profile</a></li>
+      <li ><a class="dropdown-item" href="{% url 'view_profile' request.user.id %}">Profile</a></li>
+      {% if request.user.is_superuser %}
+        <li ><a class="dropdown-item" href="#">Dashboard</a></li>
+      {% endif %}
       <li ><a class="dropdown-item" href="{% url 'edit_profile' user.id %}">Edit Profile</a></li>
       <li ><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
     </ul>

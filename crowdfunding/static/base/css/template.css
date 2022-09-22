@@ -22,3 +22,7 @@
 .content > * {
     width: 75%;
 }
+
+.btn-primary {
+    background-color: #5A8E9C !important;
+}

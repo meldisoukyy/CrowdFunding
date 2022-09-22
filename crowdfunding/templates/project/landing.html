@@ -1,0 +1,366 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CrowdFunding</title>
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="{% static 'base/imgs/funding-white-bk.ico' %}"
+    />
+    <link rel="stylesheet" href="{% static 'project/css/landing.css'%}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" defer></script>
+    <script>
+        var left = -200;
+
+        function frame() {
+            var element = document.querySelector(".sub-images");
+            left += 5;
+            element.style.left = left + "px";
+            if (left >= 0) {
+                clearInterval(id);
+            }
+        }
+
+        var id = setInterval(frame, 10);
+    </script>
+</head>
+
+<body>
+    <nav class="navbar-div">
+        <!-- Brand -->
+        <a class="navbar-brand">
+            <img src="{% static 'project/imgs/logo-white 1.png' %}" width="40" height="40" class="d-inline-block align-top" alt="" />
+            CrowdFunding
+        </a>
+        <!-- Dropdown -->
+        <div class="login-btns">
+            <a class="login" href="{% url 'login' %}">Login</a>
+            <a class="signup" href="{% url 'register' %}">Sign Up</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="left">
+            <p class="main_slogan">
+                A Little Care<br />
+                Can Change the World.
+            </p>
+            <p class="sub_slogan">
+                We connect luminous minds with super-intelligent investors.
+            </p>
+            <div class="joinus">
+                <a class="joinus_button" href="{% url 'register' %}">Join Us</a>
+                <a class="joinus_takelook" href="#count-stats">Take a Look &rarr;</a>
+            </div>
+        </div>
+        <div class="right">
+            <img class="right_image" src="{% static 'project/imgs/main_picture.png' %}" alt="" />
+        </div>
+        <div class="sub-images">
+            <img class="sub-image" src="{% static 'project/imgs/sub_picture03.png' %}" alt="" />
+            <img class="sub-image" src="{% static 'project/imgs/sub_picture02.png' %}" alt="" />
+            <img class="sub-image" src="{% static 'project/imgs/sub_picture01.png' %}" alt="" />
+            <img class="sub-image" src="{% static 'project/imgs/sub_picture00.png' %}" alt="" />
+        </div>
+
+        <section class="pt-3 pb-4 plus-section" id="count-stats">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 z-index-2 border-radius-xl mt-n8 mx-auto py-3 blur shadow-blur">
+                        <div class="row">
+                            <div class="col-md-4 position-relative">
+                                <div class="p-3 text-center">
+                                    <h3 class="text-gradient text-primary">
+                                        <span id="state1">3500+</span>
+                                    </h3>
+                                    <h5 class="mt-3">Donors</h5>
+                                    <p class="text-sm">
+                                        People of different ages are welcome to donate
+                                    </p>
+                                </div>
+                                <!-- <hr class="vertical dark" /> -->
+                            </div>
+                            <div class="col-md-4 position-relative">
+                                <div class="p-3 text-center">
+                                    <h3 class="text-gradient text-primary">
+                                        <span id="state2">640+</span>
+                                    </h3>
+                                    <h5 class="mt-3">Projects</h5>
+                                    <p class="text-sm">
+                                        Various Projects that deserve to be donated
+                                    </p>
+                                </div>
+                                <!-- <hr class="vertical dark" /> -->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 text-center">
+                                    <h3 class="text-gradient text-primary">
+                                        <span id="state3">2100+</span>
+                                    </h3>
+                                    <h5 class="mt-3">Reviews</h5>
+                                    <p class="text-sm">
+                                        Feel free to rate projects and give us a feedback
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="mb-3">Carousel cards title</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
+                            data-slide="prev">
+                            <i class="fa fa-arrow-left"></i>
+                        </a>
+                        <a class="btn btn-primary mb-3" href="#carouselExampleIndicators2" role="button"
+                            data-slide="next">
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-12">
+                        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Special title treatment</h4>
+                                                    <p class="card-text">
+                                                        With supporting text below as a natural lead-in to
+                                                        additional content.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Featured -->
+        <div class="featured">
+            <div class="featured-title">
+                <h3 class="mb-3">Carousel cards title</h3>
+            </div>
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This card has even longer content than the first to show that equal
+                            height
+                            action.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="imgs/sub_picture00.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This card has even longer content than the first to show that equal
+                            height
+                            action.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="imgs/sub_picture00.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This card has even longer content than the first to show that equal
+                            height
+                            action.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cat-div">
+            <div class="featured-title">
+                <h3 class="mb-3">CrowdFunding Helps</h3>
+            </div>
+            <div class="categories">
+                {% for category in categories %}
+                <div class="category">
+                    <img style='width=200px; height=200px;' src="{{category.image.url}}">
+                    <h6>{{category.name}}</h6>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <footer>
+            <div>
+                <small>&copy; Copyright 2023, ITI Corporation</small>
+            </div>
+        </footer>
+</body>
+
+</html>

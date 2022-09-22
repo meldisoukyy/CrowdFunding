@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'comment',
 
     'crispy_forms',
+    'crispy_bootstrap5',
     'django_cleanup',
     'django_countries',
     'social_django',
@@ -177,14 +178,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # CRISPY Config
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 AUTH_USER_MODEL = 'account.User'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ccrowdfundingg@gmail.com'
-EMAIL_HOST_PASSWORD = 'bnpstdlbbmdgfooy'
+EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com' # 'ccrowdfundingg@gmail.com'
+EMAIL_HOST_PASSWORD = 'pqulsefansjjlbhc' #'bnpstdlbbmdgfooy'
 EMAIL_PORT = 587
 
 LOGIN_URL = 'account/login'

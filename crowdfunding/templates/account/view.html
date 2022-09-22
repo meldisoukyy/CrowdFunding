@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block css %}
+<script type="text/javascript" src="{% static 'account/js/profile.js' %}"></script>
+<link rel="stylesheet" href="{% static 'account/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'base/css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'base/css/footer.css' %}" />
+{% endblock css %}
+{% block content %}
+
+    <div class="container">
+        <div class="img" style="background-image: url(https://www.techmagic.co/blog/content/images/2022/04/cover-Crowdfunding.png); height:250px; width:100%;margin: auto; background-size: cover;"></div>
+        <div class="card social-prof">
+            <div class="card-body">
+                <div class="wrapper">
+                    <img src="{{request.user.image.url}}" alt="" class="user-profile">
+                    <h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+                    <p>{{request.user.username}}</p>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs justify-content-center s-nav">
+                            
+                            <li><a class="active" href="#">Projects</a></li>
+                            <li><a href="{% url 'view_profile_donations' request.user.id %}">Donations</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--  projects  -->
+<div class="projects">
+    {% for project in projects %}
+    <div class="card" style="width: 18rem;">
+        <a href='{% url 'view_project' project.id %}' style='text-decoration:none; color:black;'>
+        <div class="card-body">
+            <h5 class="card-title">{{project.project_title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{project.project_category}}</h6>
+            <p class="card-text" style='height:100px;'>{{project.project_details}}</p>
+            <a href="{% url 'update_project' project.id %}" class="card-link" style='color:#5A8E9C'>Edit </a>
+            <a href="{% url 'view_project' project.id %}" class="card-link" style='color:#5A8E9C'>View & Delete </a>
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

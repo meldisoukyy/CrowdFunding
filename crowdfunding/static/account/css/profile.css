@@ -1,0 +1,154 @@
+.search {
+    display: none;
+}
+
+.carousel-inner {
+padding: 1em;
+height: 400px;
+
+}
+.carousel{
+width: 1100px;
+height: 400px;
+}
+.card {
+margin: 0 0.5em;
+box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+border: none;
+height: 100%;
+
+}
+.carousel-control-prev,
+.carousel-control-next {
+background-color: #e1e1e1;
+width: 6vh;
+height: 6vh;
+border-radius: 50%;
+top: 50%;
+transform: translateY(-50%);
+}
+@media (min-width: 768px) {
+.carousel-item {
+margin-right: 0;
+flex: 0 0 33.333333%;
+display: block;
+
+}
+.carousel-inner {
+display: flex;
+}
+}
+.card .img-wrapper {
+width: 100%;
+height: 230px;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 15px;
+}
+.card img {
+height: 230px;
+border-radius: 15px;
+}
+@media (max-width: 767px) {
+.card .img-wrapper {
+height: 17em;
+border-radius: 15px;
+}
+}
+body {
+background-color: #f0f6ff;
+color: #28384d;
+
+}
+/*social */
+.card-one {
+position: relative;
+width: 300px;
+background: #fff;
+box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+}
+.card {
+margin-bottom: 35px;
+box-shadow: 0 10px 20px 0 rgba(26, 44, 57, 0.14);
+border: none;
+}
+
+
+.social-prof {
+color: #333;
+text-align: center;
+}
+
+.social-prof .wrapper {
+width: 70%;
+margin: auto;
+margin-top: -100px;
+}
+
+.social-prof img {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+margin-bottom: 20px;
+border: 5px solid #fff;
+/*border: 10px solid #70b5e6ee;*/
+}
+
+.social-prof h3 {
+font-size: 36px;
+font-weight: 700;
+margin-bottom: 0;
+}
+
+.social-prof p {
+font-size: 18px;
+}
+
+.social-prof .nav-tabs {
+border: none;
+}
+
+.card .nav>li {
+position: relative;
+display: block;
+}
+
+.card .nav>li>a {
+position: relative;
+display: block;
+padding: 10px 15px;
+font-weight: 300;
+border-radius: 4px;
+}
+
+.card .nav>li>a:focus,
+.card .nav>li>a:hover {
+text-decoration: none;
+background-color: #eee;
+}
+
+.card .s-nav>li>a.active {
+text-decoration: none;
+background-color: #3afe;
+color: #fff;
+}
+
+.text-blue {
+color: #3afe;
+}
+
+.card .nav.nav-tabs.justify-content-center{
+font-size: medium;
+}
+
+.projects {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 160px;
+}
+
+.projects > .card {
+    width: 31% !important;
+}

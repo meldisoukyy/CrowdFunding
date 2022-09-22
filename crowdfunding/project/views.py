@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -15,10 +16,31 @@ from .forms import ProjectForm, ImageForm, ReviewRating, ReviewForm
 
 from categories.models import Category
 
+class LandingPage(ListView):
+    model = Project
+    template_name: str = 'project/landing.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'projects' : Project.objects.all(),
+            'categories' : Category.objects.all(),
+        })
+        return context
+
+
 class ProjectHome(ListView):
     model = Project
     template_name: str = 'project/home.html'
     context_object_name = 'all_projects'
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'latest_projects' : Project.objects.order_by('-project_created_date')[:10],
+            'categories' : Category.objects.order_by('name'),
+        })
+        return context
 
     def post(self, request, *args, **kwargs):
         searched = request.POST['searched']

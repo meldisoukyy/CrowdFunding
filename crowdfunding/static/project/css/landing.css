@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* template */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 24px;
+    scroll-behavior: smooth;
+}
+
+html, body, .main {
+    height: 100%;
+}
+
+.navbar-div {
+    padding: 10px 10%;
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.navbar-brand:hover {
+    color: white;
+    text-decoration: none;
+}
+    
+.login-btns {
+    width: 20%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.login {
+    color: #225A69;
+    background-color: white;
+    padding: 4px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.login:hover {
+    color: #225A69;
+    text-decoration: none;
+}
+
+.signup {
+    color: #225A69;
+    background-color: white;
+    padding: 5px 10px;
+    border: 2px solid #5A8E9C;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.signup:hover {
+    color: white;
+    background-color: #5A8E9C;
+    text-decoration: none;
+}
+
+.left {
+    padding-left: 10%;
+    background-color: #5A8E9C;
+    width: 71%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main_slogan {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    color: white;
+    margin: 0px;
+}
+
+.sub_slogan {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    color: orange;
+    margin: 0px;
+}
+
+.right {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+}
+
+.joinus {
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.joinus_button {
+    color: white;
+    background-color: #225A69;
+    padding: 10px 20px;
+    border: 2px solid #225A69;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.joinus_button:hover {
+    color: #225A69;
+    background-color: white;
+    text-decoration: none;
+}
+
+.joinus_takelook {
+    color: white;
+    font-size: 20px;
+}
+
+.joinus_takelook:hover {
+    color: white;
+}
+
+.sub-images {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sub-image {
+    position: relative;
+    top: -140px;
+    z-index: 3;
+}
+
+.plus-section {
+    background-color: #EBF3F6;
+}
+
+#state1,
+#state2,
+#state3 {
+    font-weight: 900;
+    color: #225A69;
+}
+
+.mt-3 {
+    font-weight: bold;
+}
+
+/* Featured */
+.featured {
+    background-color: whitesmoke; 
+    padding: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-deck {
+    width: 100%;
+}
+
+.featured-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+/* Categories */
+.cat-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.category {
+    width: 30%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category > img {
+    width: 80%;
+}
+
+footer {
+    background-color: #225A69;
+    color: white;
+}
+
+footer > div {
+    display: flex;
+    justify-content: center;
+}

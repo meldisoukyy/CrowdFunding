@@ -1,3 +1,4 @@
+from distutils.command import upload
 from django.db import models
 from django.shortcuts import get_list_or_404
 from categories.models import Category
@@ -12,6 +13,7 @@ class Project(models.Model):
     project_start_date = models.DateField(null=True, blank=True)
     project_end_date = models.DateField(null=True, blank=True) 
     project_tags = TaggableManager()
+    project_main_image = models.ImageField(upload_to='project/imgs', null=True)
     project_created_date = models.DateTimeField(auto_now_add=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 

@@ -1,0 +1,25 @@
+{% extends 'registration/base.html' %}
+{% load static %}    
+{% block title %}
+Check Mail
+{% endblock %}
+
+{% block css %}
+<style>
+    body{
+        background-color: aliceblue;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div style="color: #5A8E9C; text-align: center;">
+        <h1 style="font-family: poppins;">CrowdFunding</h1>
+        <img src="{% static 'account/images/Envelope-amico.png' %}" width="400px" height="400px">
+        <h2 style="color: #5A8E9C;">Please confirm your email address to complete the registration</h2>
+    </div>
+</div>
+
+    
+{% endblock %}
