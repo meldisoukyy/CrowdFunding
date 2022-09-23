@@ -1,6 +1,10 @@
 {% extends 'base/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% block title %}
+    Edit profile
+{% endblock title %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/navbar.css' %}" />
 <link rel="stylesheet" href="{% static 'base/css/footer.css' %}" />
@@ -8,7 +12,7 @@
 {% endblock css %}
 
 {% block content %}
-{% comment %} Delete project {% endcomment %}
+{% comment %} Delete Account {% endcomment %}
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

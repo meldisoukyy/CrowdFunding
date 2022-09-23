@@ -7,7 +7,7 @@ from .views import (
     signin,
     ViewProfile,
     ViewProfileDonations,
-    UpdateCoursesView,
+    UpdateAccountView,
     Dashboard,
     feature_it,
 )
@@ -22,8 +22,8 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('view_profile/<int:pk>', ViewProfile.as_view(), name='view_profile'),
     path('view_profile/donations/<int:pk>', ViewProfileDonations.as_view(), name='view_profile_donations'),
-    path('edit_profile/<int:pk>', UpdateCoursesView.as_view(), name='edit_profile'),
-    path('dashboard/', Dashboard.as_view(), name='dashboard'),
+    path('edit_profile/<int:pk>', UpdateAccountView.as_view(), name='edit_profile'),
+    path('dashboard/<int:pk>', Dashboard.as_view(), name='dashboard'),
     path('',include('password.urls')),
     path('feature_id/', feature_it, name='feature_it'),
 ]

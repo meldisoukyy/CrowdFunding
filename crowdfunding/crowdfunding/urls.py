@@ -14,6 +14,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('password/', include('password.urls')),
     path('donation/', include('donation.urls')),
+    path('category/', include('categories.urls')),
     # path('category/', include('categories.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

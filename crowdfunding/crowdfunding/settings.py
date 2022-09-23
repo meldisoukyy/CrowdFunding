@@ -185,8 +185,8 @@ AUTH_USER_MODEL = 'account.User'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ahmedmohamedtaha2002@gmail.com' # 'ccrowdfundingg@gmail.com'
-EMAIL_HOST_PASSWORD = 'pqulsefansjjlbhc' #'bnpstdlbbmdgfooy'
+EMAIL_HOST_USER = 'ccrowdfundingg@gmail.com' # 'ahmedmohamedtaha2002@gmail.com' # 'ccrowdfundingg@gmail.com'
+EMAIL_HOST_PASSWORD = 'bnpstdlbbmdgfooy' # 'pqulsefansjjlbhc' #'bnpstdlbbmdgfooy'
 EMAIL_PORT = 587
 
 LOGIN_URL = '/account/login'

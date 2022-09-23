@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    Profile
+{% endblock %}
 {% block css %}
 <script type="text/javascript" src="{% static 'account/js/profile.js' %}"></script>
 <link rel="stylesheet" href="{% static 'account/css/profile.css' %}" />
@@ -9,7 +12,7 @@
 {% block content %}
 
     <div class="container">
-        <div class="img" style="background-image: url(https://www.techmagic.co/blog/content/images/2022/04/cover-Crowdfunding.png); height:250px; width:100%;margin: auto; background-size: cover;"></div>
+        <div class="img" style="background-image: url(https://www.techmagic.co/blog/content/images/2022/04/cover-Crowdfunding.png); height:250px; width:99%; margin: auto; background-size: cover;"></div>
         <div class="card social-prof">
             <div class="card-body">
                 <div class="wrapper">
@@ -38,8 +41,8 @@
             <h5 class="card-title">{{project.project_title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{project.project_category}}</h6>
             <p class="card-text" style='height:100px;'>{{project.project_details}}</p>
-            <a href="{% url 'update_project' project.id %}" class="card-link" style='color:#5A8E9C'>Edit </a>
             <a href="{% url 'view_project' project.id %}" class="card-link" style='color:#5A8E9C'>View & Delete </a>
+            <a href="{% url 'update_project' project.id %}" class="card-link" style='color:#5A8E9C'>Edit </a>
         </div>
         </a>
     </div>

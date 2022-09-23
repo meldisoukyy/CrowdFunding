@@ -4,14 +4,11 @@
 {% block content %}
 
 {% if searched %}
-<div class="container-all">
-    <div class="projects">
         <!-- Nested row for non-featured blog posts-->
-        <div class="row">
-            <div class="col-lg-4">
+            <div style="display: flex; flex-wrap: wrap;">
                 <!-- Blog post-->
                 {% for project in projects %}
-                <div class="card mt-4">
+                <div class="card" style="width: 30%;">
                     <a href="#!"><img class="card-img-top" src="{{project.project_main_image.url}}"
                             alt="..." /></a>
                     <div class="card-body">
@@ -25,13 +22,10 @@
                         </div>
                         <a class="btn btn-primary" href="#!">Read more →</a>
                     </div>
-                    {% endfor %}
                 </div>
+                    {% endfor %}
             </div>
 
-        </div>
-    </div>
-</div>
 {% endif %}
 
 {% endblock %}

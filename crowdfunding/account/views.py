@@ -1,4 +1,5 @@
 from pipes import Template
+from unicodedata import category
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import DetailView, TemplateView
 from django.contrib.auth import authenticate, login
@@ -7,7 +8,7 @@ from .models import User
 from .tokens import account_activation_token
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .forms import RegisterForm, EditProfileForm
 from django.core.mail import EmailMessage
@@ -118,7 +119,7 @@ class ViewProfileDonations(DetailView):
         })
         return context
 
-class UpdateCoursesView(UpdateView):
+class UpdateAccountView(UpdateView):
     form_class = EditProfileForm
     template_name = 'account/edit.html'
     model = User
@@ -141,11 +142,33 @@ class Dashboard(TemplateView):
         context = super().get_context_data(**kwargs)
         context.update({
             'projects': Project.objects.order_by('id'),
+            'categories': Category.objects.order_by('id')
         })
         return context
+
+    def post(self, request, *args, **kwargs):
+        if 'delete_project' in request.POST.keys():
+            project_id = self.kwargs['pk']
+            try:
+                project = Project.objects.filter(pk = project_id)
+            except: 
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+            project.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        elif 'delete_category' in request.POST.keys():
+            category_id = self.kwargs['pk']
+            try:
+                category = Category.objects.filter(pk = category_id)
+            except: 
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+            category.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            return super().post(self, request, *args, **kwargs)
+
 
 def feature_it(request):
     project = get_object_or_404(Project, pk = request.POST['project'])
     project.is_featured = True
     project.save()
-    return redirect(reverse('dashboard'))
+    return redirect(reverse('project_home'))

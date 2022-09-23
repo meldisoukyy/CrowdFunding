@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render , redirect
+from django.urls import reverse
 
 from django.core.mail import EmailMessage 
 from django.utils.http import urlsafe_base64_encode
@@ -40,7 +41,7 @@ def password_reset_request(request):
                         mail_subject, message, to=[user.email]
                     )
                     email.send()
-                    return redirect ("password/password_reset/done/")
+                    return redirect(reverse('password_reset_done'))
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})                    
    

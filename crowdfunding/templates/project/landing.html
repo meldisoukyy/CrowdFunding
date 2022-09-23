@@ -137,18 +137,16 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <div class="row">
-                                        {% for project in projects %}
-                                        {% if forloop.counter < 4 %} <div class="col-md-4 mb-3">
-                                            <div class="card">
+                                        {% for project in top_projects %}
+                                        {% if forloop.counter < 4 %} 
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card" style="height: 450px;">
                                                 <img class="img-fluid" alt="100%x280"
                                                     src="{{project.project_main_image.url}}" />
                                                 <div class="card-body">
                                                     <h4 class="card-title">{{project.project_title}}</h4>
                                                     <p class="card-text">
-                                                        {{project.project_details}}
-                                                    </p>
-                                                    <p class="card-text">
-                                                        {{project.project_details}}
+                                                        {{project.project_review_ratio}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -160,19 +158,19 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row">
-                                    {% for project in projects %}
-                                    {% if forloop.counter > 3 and forloop.counter < 7 %} <div class="col-md-4 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="{{project.project_main_image.url}}" />
-                                            <div class="card-body">
-                                                <h4 class="card-title">{{project.project_title}}</h4>
-                                                <p class="card-text">
-                                                    With supporting text below as a natural lead-in to
-                                                    additional content.
-                                                </p>
+                                    {% for project in top_projects %}
+                                    {% if forloop.counter > 3 and forloop.counter < 7 %} 
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card" style="height: 450px;">
+                                                <img class="img-fluid" alt="100%x280"
+                                                    src="{{project.project_main_image.url}}" />
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{project.project_title}}</h4>
+                                                    <p class="card-text">
+                                                        {{project.project_review_ratio}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                     {% endif %}
                                     {% endfor %}
@@ -187,71 +185,20 @@
     <!-- Featured -->
     <div class="featured">
         <div class="featured-title">
-            <h3 class="mb-3">Carousel cards title</h3>
+            <h3 class="mb-3">Featured Projects</h3>
         </div>
         <div class="card-deck">
+            {% for project in featured_projects %}
             <div class="card">
-                <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
+                <img class="card-img-top" src="{{project.project_main_image.url}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                    <h5 class="card-title">{{project.project_title}}</h5>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">{{project.project_created_date}}</small>
                 </div>
             </div>
-            <div class="card">
-                <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                        content.
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="{% static 'project/imgs/sub_picture00.png' %}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal
-                        height
-                        action.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="imgs/sub_picture00.png" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal
-                        height
-                        action.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="imgs/sub_picture00.png" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal
-                        height
-                        action.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="cat-div">

@@ -1,11 +1,12 @@
 from distutils.command import upload
 from django.db import models
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_object_or_404, redirect
 from categories.models import Category
 from account.models import User
 from donation.models import Donation
 from taggit.managers import TaggableManager
 from django.db.models import Sum, Count
+from django.urls import reverse
 
 
 class Project(models.Model):
@@ -20,6 +21,7 @@ class Project(models.Model):
     project_tags = TaggableManager()
     project_main_image = models.ImageField(upload_to='project/imgs', null=True)
     is_featured = models.BooleanField(default=False, null=True)
+    project_review_ratio = models.FloatField(default=0.0, null=True)
     project_created_date = models.DateTimeField(auto_now_add=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
@@ -36,14 +38,14 @@ class Project(models.Model):
     def allDonations(self):
         return Donation.objects.filter(project=self)
 
-    def deleteOrNot(self):
-        if (int(self.totalDonation()) / int(self.project_total_target)) * 100 > 25:
-            return False
-
-        return True
-
     def donation_ratio(self):
         return (int(self.totalDonation()) / int(self.project_total_target)) * 100
+
+    def delete(self, *args, **kwargs):
+        project = get_object_or_404(Project, id=self.pk)
+        if project.donation_ratio() > 25:
+            return redirect(reverse('project_home'))
+        return super(Project, self).delete(*args, **kwargs)
 
     def averageReview(self):
         total_reviews = ReviewRating.objects.filter(
@@ -52,7 +54,7 @@ class Project(models.Model):
             project=self).aggregate(total=Count('project'))
         if number_of_people['total'] == 0 or total_reviews['total'] == 0:
             return 0
-        return total_reviews['total'] / number_of_people['total']
+        return round(total_reviews['total'] / number_of_people['total'], 2)
 
 
 class Image(models.Model):

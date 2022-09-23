@@ -6,7 +6,7 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         fields = '__all__'
-        exclude = ('created_by', 'is_featured')
+        exclude = ('created_by', 'is_featured', 'project_review_ratio')
     
     def clean_project_end_date(self):
         start_date = self.cleaned_data.get('project_start_date')

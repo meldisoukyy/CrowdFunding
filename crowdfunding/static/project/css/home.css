@@ -37,6 +37,7 @@ footer {
 }
 
 .body-div {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -82,4 +83,10 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.card-text{
+    height: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

@@ -1,4 +1,6 @@
+from http.client import REQUESTED_RANGE_NOT_SATISFIABLE
 from multiprocessing import context
+from unicodedata import category
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -18,6 +20,8 @@ from categories.models import Category
 from comment.models import Comment
 from donation.models import Donation
 
+from django.db.models import Sum, Count
+
 from django.contrib.auth.mixins import (
 LoginRequiredMixin,
 UserPassesTestMixin # new
@@ -31,7 +35,7 @@ class LandingPage(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'projects': Project.objects.order_by('-project_created_date')[:6],
+            'top_projects': Project.objects.all().order_by('-project_review_ratio')[:6],
             'featured_projects': Project.objects.filter(is_featured = True).order_by('-project_created_date')[:5],
             'categories': Category.objects.all(),
             'donations_total': Donation.objects.count(),
@@ -65,6 +69,18 @@ class ProjectHome(LoginRequiredMixin,ListView):
             projects = Project.objects.filter(project_title__contains=searched)
         return render(request, 'project/search.html', context={"searched": searched, "projects": projects})
 
+class ProjectHomeCategory(LoginRequiredMixin,ListView):
+    model = Project
+    template_name: str = 'project/home-category.html'
+    context_object_name = 'all_projects'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'latest_projects': Project.objects.filter(project_category = self.kwargs['pk']).order_by('-project_created_date')[:10],
+            'categories': Category.objects.order_by('name'),
+        })
+        return context
 # Create
 
 
@@ -78,7 +94,7 @@ class CreateProject(LoginRequiredMixin,SuccessMessageMixin, CreateView):
         return reverse('project_home')
 
     def post(self, request, *args, **kwargs):
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         files = request.FILES.getlist("image")
         if form.is_valid():
             f = form.save(commit=False)
@@ -87,8 +103,7 @@ class CreateProject(LoginRequiredMixin,SuccessMessageMixin, CreateView):
             form.save_m2m()
             for i in files:
                 Image.objects.create(project=f, image=i)
-            # messages.success(request, "New Project Added")
-            return HttpResponseRedirect("/project")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 # Update
 
@@ -100,6 +115,18 @@ class UpdateProject(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     # extra_context = {"imageform": ImageForm()}
     # success_message: str = 'Object Updated Successfully!'
 
+    def post(self, request, *args, **kwargs):
+        form = ProjectForm(request.POST, request.FILES)
+        files = request.FILES.getlist("image")
+        project = get_object_or_404(Project, pk=self.kwargs['pk'])
+        if form.is_valid():
+            if request.FILES['image']:
+                images = Image.objects.filter(project=self.kwargs['pk'])
+                images.delete()
+            for i in files:
+                Image.objects.create(project=project, image=i)
+            return super().post(self, request, *args, **kwargs)
+
     def get_success_url(self) -> str:
         return reverse('project_home')
 
@@ -108,24 +135,10 @@ class UpdateProject(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         context['imageform'] = ImageForm()
         return context
 
-    def post(self, request, *args, **kwargs):
-        form = ProjectForm(request.POST)
-        files = request.FILES.getlist("image")
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.created_by = request.user
-            f.save()
-            form.save_m2m()
-            if files:
-                images = Image.objects.filter(project=self.kwargs['pk'])
-                images.delete()
-            for i in files:
-                Image.objects.create(project=f, image=i)
-            return HttpResponseRedirect("/project")
-    
     def test_func(self): # new
         obj = self.get_object()
         return obj.created_by == self.request.user
+
 
 # View
 class ViewProject(DetailView):
@@ -189,6 +202,8 @@ class ViewProject(DetailView):
         data.rating = request.POST['rating']
         data.user = request.user
         data.save()
+        project.project_review_ratio = project.averageReview()
+        project.save()
         return HttpResponseRedirect("/project/view/"+str(self.kwargs['pk']))
     
     def post_operation_not_supported(self,request,*args, **kwargs):
@@ -204,38 +219,6 @@ class DeleteProject(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         obj = self.get_object()
         return obj.created_by == self.request.user
 
-# def projects_index(request, tag_slug=None):
-#     projects = Project.get_all_projects()
-#     categories = Category.get_all_categories()
-#     tag = None
-#     if tag_slug:
-#         tag = get_object_or_404(Tag, slug=tag_slug)
-#         projects = Project.objects.filter(tags__in=[tag])
-#     return render(request, 'project/index.html', context={"projects": projects, "categories": categories, "tag": tag})
-
-
-def submit_review(request, project_id):
-    url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':
-        try:
-            reviews = ReviewRating.objects.get(project__id=project_id)
-            form = ReviewForm(request.POST, instance=reviews)
-            form.save()
-            messages.success(
-                request, 'Thank you! Your review has been updated.')
-            return redirect(url)
-        except ReviewRating.DoesNotExist:
-            form = ReviewForm(request.POST)
-            if form.is_valid():
-                data = ReviewRating()
-                data.rating = form.cleaned_data['rating']
-                data.project_id = project_id
-                data.save()
-                messages.success(
-                    request, 'Thank you! Your review has been submitted.')
-                return redirect(url)
-    project = get_object_or_404(Project, pk=project_id)
-    return render(request, 'project/show.html', {"project": project})
 
 
 def tagged(request, slug):

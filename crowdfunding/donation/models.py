@@ -10,7 +10,7 @@ class Donation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.amount
+        return str(self.amount)
 
     @classmethod
     def totalDonation(cls,project):

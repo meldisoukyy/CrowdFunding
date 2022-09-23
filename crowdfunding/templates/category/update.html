@@ -7,24 +7,13 @@
     <link rel="stylesheet" href="{% static 'base/css/footer.css' %}" />
 {% endblock css %}
 {% load crispy_forms_tags %}
-{% block title %}Update Project{% endblock title %}
+{% block title %}Update Category{% endblock title %}
 {% block content %}
 <div class="card">
-  <div class="card-header">Update Project</div>
+  <div class="card-header">Update Category</div>
   <div class="card-body create-form">
     <form class="" method="POST" enctype="multipart/form-data">
       {% csrf_token %} {{form|crispy }}
-      <div id="div_id_project_image" class="form-group"> 
-        <label>
-                Upload new images
-        </label> 
-        <div>
-        {{ imageform.management_form }}
-        {% for form in imageform %}
-            {{ form }}
-        {% endfor %}
-        </div>
-      </div>
       <div class="btns">
         <button type="submit" class="btn btn-submit">Update</button>
         <a href="{{ request.path }}" class="btn btn-return">Return</a>
